@@ -298,6 +298,19 @@ issues, I want it to create the proper hooks to solve any problem
 **Running Tests**
 To run the tests make sure [plenary](https://github.com/nvim-lua/plenary.nvim) is checked out in the parent directory of *this* repository, then run `make test`.
 
+#### Auto-save
+
+Auto-save will trigger `BufWrite` events when Harpoon quick menu is opened.
+This then triggers Harpoon to close the quick menu, resulting in the menu appearing then quickly closing.
+
+To resolve this you can use `condition` config variable to disable auto-save for the harpoon file type.
+
+```lua
+condition = function(buf)
+  return vim.fn.getbufvar(buf, "&filetype") ~= "harpoon"
+end,
+```
+
 ## ⇁ Social
 For questions about Harpoon, there's a #harpoon channel on [the Primeagen's Discord](https://discord.gg/theprimeagen) server.
 * [Discord](https://discord.gg/theprimeagen)
